@@ -16,6 +16,12 @@ const bot = new Telegraf(BOT_TOKEN)
 
 const posts: Post[] = []
 
+bot.command('getposts', (ctx: Context) => {
+    for (let i = 0; i < posts.length; i++) {
+        ctx.reply(`<i>№${i + 1}</i>\n\n— <b>${posts[i].title}</b>\n${posts[i].description}\n\n<code>Автор: ${posts[i].author}</code>`, {parse_mode: 'HTML'})
+    }
+})
+
 bot.on('message', async (ctx: Context) => {
     try {
         const message = ((ctx.message) as Message.TextMessage).text
